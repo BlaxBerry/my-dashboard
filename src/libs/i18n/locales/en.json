@@ -1,0 +1,33 @@
+{
+  "pages": {
+    "settings": {
+      "themeMode": "Theme Mode",
+      "themeLanguage": "Theme Language",
+      "themePaletteColor": "Theme Palette"
+    }
+  },
+
+  "components": {
+    "navLinks": {
+      "home": "Home",
+      "collections": "Collections",
+      "settings": "Settings",
+      "about": "About"
+    },
+    "languages": {
+      "zh": "Chinese",
+      "en": "English",
+      "ja": "Japanese"
+    },
+    "palettes": {
+      "TEAL": "Teal",
+      "INDIGO": "Indigo",
+      "VIOLET": "Violet",
+      "CRIMSON": "Crimson"
+    },
+    "modes": {
+      "dark": "Dark Mode",
+      "light": "Light Mode"
+    }
+  }
+}

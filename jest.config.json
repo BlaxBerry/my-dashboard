@@ -1,0 +1,5 @@
+{
+  "coverageProvider": "v8",
+  "bail": 1,
+  "verbose": true
+}

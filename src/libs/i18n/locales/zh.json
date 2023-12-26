@@ -1,0 +1,33 @@
+{
+  "pages": {
+    "settings": {
+      "themeMode": "主题模式",
+      "themeLanguage": "主题语言",
+      "themePaletteColor": "主题色调"
+    }
+  },
+
+  "components": {
+    "navLinks": {
+      "home": "首页",
+      "collections": "收集",
+      "settings": "设置",
+      "about": "关于"
+    },
+    "languages": {
+      "zh": "中文",
+      "en": "英语",
+      "ja": "日语"
+    },
+    "palettes": {
+      "TEAL": "鸭羽青色",
+      "INDIGO": "靛青色",
+      "VIOLET": "紫罗兰色",
+      "CRIMSON": "绯红色"
+    },
+    "modes": {
+      "dark": "黑暗模式",
+      "light": "明亮模式"
+    }
+  }
+}

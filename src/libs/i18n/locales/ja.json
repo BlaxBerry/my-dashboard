@@ -1,0 +1,33 @@
+{
+  "pages": {
+    "settings": {
+      "themeMode": "テーマモード",
+      "themeLanguage": "テーマ言語",
+      "themePaletteColor": "テーマカラー"
+    }
+  },
+
+  "components": {
+    "navLinks": {
+      "home": "ホーム",
+      "collections": "コレクション",
+      "settings": "設定",
+      "about": "関連情報"
+    },
+    "languages": {
+      "zh": "中国語",
+      "en": "英語",
+      "ja": "日本語"
+    },
+    "palettes": {
+      "TEAL": "ティール",
+      "INDIGO": "インディゴ",
+      "VIOLET": "バイオレット",
+      "CRIMSON": "クリムゾン"
+    },
+    "modes": {
+      "dark": "ダークモード",
+      "light": "ライトモード"
+    }
+  }
+}

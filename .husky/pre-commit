@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# command line colors
+PURPLE='\033[0;35m'
+NOCOLOR='\033[0m'
+
+# 0. message
+echo "${PURPLE}[Husky] pre-commit${NOCOLOR}"
+
+# 1. run prettier check & format
+echo "${PURPLE}[Prettier]${NOCOLOR}"
+yarn check-prettier
+yarn format
+
+# 2. run type check
+echo "${PURPLE}[TS Type]${NOCOLOR}"
+yarn check-type
+
+# 3. run eslint check & format
+echo "${PURPLE}[ESLint]${NOCOLOR}"
+yarn check-eslint

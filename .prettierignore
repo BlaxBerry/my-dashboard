@@ -1,0 +1,16 @@
+*.html 
+
+
+.cache/
+.github/
+.husky/
+# .vscode/
+
+
+node_modules/
+dist
+public/
+yarn.lock
+
+tsconfig.json
+packages-build-stats.html
