@@ -2,6 +2,9 @@
  * 基于网易云音乐
  * * 本项目仅供个人学习研究使用，禁止用于商业或非法用途！！！！
  * @see https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi
+ *
+ * api 基于 http，需要在浏览器中启用混合内容才能成功访问
+ * @see https://experienceleague.adobe.com/docs/target/using/experiences/vec/troubleshoot-composer/mixed-content.html?lang=zh-Hans
  */
 import { handlePlaylistData, handleSongDate } from "../fixtures/functions";
 import type {
@@ -54,7 +57,7 @@ const getSearchList = async ({
       return Promise.reject({
         code: res.status,
         result: undefined,
-        error: "request failed",
+        error: "List Request Failed",
       });
     }
 
@@ -112,7 +115,7 @@ export const getSongDetail = async (
       return Promise.reject({
         code: res.status,
         result: undefined,
-        error: "request failed",
+        error: "Song Detail Request Failed",
       });
     }
     return Promise.resolve({
@@ -153,7 +156,7 @@ const getSongURL = async (
       return Promise.reject({
         code: res.status,
         result: undefined,
-        error: "request failed",
+        error: "Song URL Request Failed",
       });
     }
 
@@ -161,7 +164,7 @@ const getSongURL = async (
       return Promise.reject({
         code: res.status,
         result: undefined,
-        error: "music url source not found",
+        error: "Song URL Source Not Found",
       });
     }
 
@@ -205,7 +208,7 @@ const getSongLyric = async (
       return Promise.reject({
         code: res.status,
         result: undefined,
-        error: "request failed",
+        error: "Song Lyric Request Failed",
       });
     }
     return Promise.resolve({

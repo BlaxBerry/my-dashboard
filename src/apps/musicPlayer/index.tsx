@@ -1,10 +1,14 @@
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { memo, useState } from "react";
 
-import { FavoriteList, LyricList, Player, Search } from "./components";
-import { ContextMusicPlayer, DEFAULT_CONTEXT_VALUE } from "./fixtures/contexts";
+import { Favourite, LyricList, Player, Search } from "./components";
+import {
+  ContextMusicPlayer,
+  ContextMusicPlayerDuration,
+  DEFAULT_CONTEXT_VALUE,
+} from "./fixtures/contexts";
 
-export default function AppMusicPlayer() {
+export default function MusicPlayerContainer() {
   const [value, setValue] = useState(DEFAULT_CONTEXT_VALUE);
 
   return (
@@ -23,19 +27,9 @@ export default function AppMusicPlayer() {
           },
         }}
       >
+        {/* player & lyric list */}
         <Box display="flex" flexDirection="column" flexWrap="wrap">
-          {/* player */}
-          <Player sx={{ mb: 1 }} />
-
-          {/* lyric list */}
-          <LyricList
-            sx={{
-              display: {
-                xs: "none",
-                sm: "block",
-              },
-            }}
-          />
+          <MusicPlayerAndLyricListContainer />
         </Box>
 
         {/* search list */}
@@ -52,7 +46,7 @@ export default function AppMusicPlayer() {
         />
 
         {/* favorite list */}
-        <FavoriteList
+        <Favourite
           sx={{
             display: {
               xs: "none",
@@ -64,3 +58,26 @@ export default function AppMusicPlayer() {
     </ContextMusicPlayer.Provider>
   );
 }
+
+const MusicPlayerAndLyricListContainer = memo(function PlayerAndLyricList() {
+  const [currentTime, setCurrentTime] = useState<number>(0);
+
+  return (
+    <ContextMusicPlayerDuration.Provider
+      value={{ currentTime, setCurrentTime }}
+    >
+      {/* player */}
+      <Player sx={{ mb: 1 }} />
+
+      {/* lyric list */}
+      <LyricList
+        sx={{
+          display: {
+            xs: "none",
+            sm: "block",
+          },
+        }}
+      />
+    </ContextMusicPlayerDuration.Provider>
+  );
+});

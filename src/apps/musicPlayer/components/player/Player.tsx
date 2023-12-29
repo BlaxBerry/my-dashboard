@@ -7,16 +7,47 @@ import type {
   SxProps as MuiSxProps,
   Theme as MuiTheme,
 } from "@mui/material/styles";
-import { memo, type FC } from "react";
+import { memo, useCallback, type FC } from "react";
 
+import { useDispatch, useSelector } from "@/libs/redux/hooks";
+import { musicPlayerActions } from "@/libs/redux/slices";
 import {
   PLAYER_CONTAINER_WIDTH,
   PLAYER_PICTURE_SIZE,
 } from "../../fixtures/constants";
 import { ContextMusicPlayer } from "../../fixtures/contexts";
+import { MOCK_SONG_DETAIL } from "../../fixtures/mocks";
+import type { SongData } from "../../types/api";
 import PlayerControllers from "./PlayerControllers";
 
 const Player: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
+  const dispatch = useDispatch();
+  const favouriteList = useSelector((state) => state.musicPlayer.favouriteList);
+
+  const checkBelongToFavouriteList = useCallback(
+    (id?: number): boolean => {
+      return id ? !!favouriteList?.find((item) => item.id === id) : false;
+    },
+    [favouriteList],
+  );
+
+  const handleClickLikeButton = useCallback(
+    (songDetail?: SongData) => {
+      if (!songDetail) return;
+      const id = songDetail?.id;
+      const isAlreadyExist = checkBelongToFavouriteList(id);
+
+      if (!isAlreadyExist) {
+        // add to favourite
+        dispatch(musicPlayerActions.addToFavouriteList(songDetail));
+      } else {
+        // remove from favourite
+        dispatch(musicPlayerActions.removeFromFavouriteList(id));
+      }
+    },
+    [dispatch, checkBelongToFavouriteList],
+  );
+
   return (
     <ContextMusicPlayer.Consumer>
       {({ value }) => (
@@ -29,12 +60,14 @@ const Player: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
             ...sx,
           }}
         >
-          {(value?.isChanging || !value?.songUrl) && (
+          {(value?.isChanging || value?.errorMessage) && (
             <Typography
               display="flex"
               justifyContent="center"
               alignItems="center"
-              sx={{
+              variant="caption"
+              fontWeight={700}
+              sx={(theme) => ({
                 position: "absolute",
                 height: "100%",
                 width: "100%",
@@ -42,13 +75,15 @@ const Player: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
                 left: 0,
                 zIndex: 9999,
                 borderRadius: 1,
-                bgcolor: "background.paper",
+                color: theme.palette.primary.main,
+                bgcolor:
+                  theme.palette.mode === "dark"
+                    ? "rgba(60, 60, 60)"
+                    : "rgba(240, 240, 240)",
                 cursor: "wait",
-              }}
-              variant="caption"
-              color="GrayText"
+              })}
             >
-              {value?.isChanging ? "Loading..." : "无法获取播放地址换首歌吧"}
+              {value?.isChanging ? "Loading..." : value?.errorMessage}
             </Typography>
           )}
 
@@ -57,13 +92,16 @@ const Player: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
             <Paper
               elevation={2}
               component="img"
-              src={value?.songDetail?.al?.picUrl}
+              src={value?.songDetail?.al?.picUrl ?? ""}
               alt={value?.songDetail?.al?.name}
               draggable={false}
+              loading="lazy"
               sx={{
+                borderRadius: 2,
+                minWidth: PLAYER_PICTURE_SIZE,
+                minHeight: PLAYER_PICTURE_SIZE,
                 width: PLAYER_PICTURE_SIZE,
                 height: PLAYER_PICTURE_SIZE,
-                borderRadius: 2,
               }}
             />
 
@@ -105,8 +143,24 @@ const Player: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
               </Typography>
               <div style={{ flexGrow: 1 }} />
               {/* add to favorite list */}
-              <Box>
-                <IconButton size="small" color="secondary">
+              <Box
+                sx={{
+                  visibility:
+                    value?.songDetail?.id === MOCK_SONG_DETAIL?.id
+                      ? "hidden"
+                      : "visible",
+                }}
+              >
+                <IconButton
+                  size="small"
+                  sx={{ boxShadow: 2 }}
+                  onClick={() => handleClickLikeButton(value?.songDetail)}
+                  color={
+                    checkBelongToFavouriteList(value?.songDetail?.id)
+                      ? "secondary"
+                      : "default"
+                  }
+                >
                   <FavoriteIcon sx={{ width: 20, height: 20 }} />
                 </IconButton>
               </Box>

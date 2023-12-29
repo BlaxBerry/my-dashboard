@@ -17,18 +17,23 @@ import {
 } from "../../fixtures/constants";
 import {
   ContextMusicPlayer,
-  DEFAULT_CONTEXT_VALUE,
+  ContextMusicPlayerDuration,
 } from "../../fixtures/contexts";
 import { formatLyricDuration } from "../../fixtures/functions";
 
 const LyricList: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
   const { value } = useContext(ContextMusicPlayer);
-  const currentSongId = value?.songDetail?.id;
+  const { currentTime } = useContext(ContextMusicPlayerDuration);
+
+  const currentSongId = useMemo(
+    () => value?.songDetail?.id,
+    [value?.songDetail?.id],
+  );
 
   const { data, isLoading } = useQuery({
     queryKey: [currentSongId],
     queryFn: async () => {
-      if (currentSongId === DEFAULT_CONTEXT_VALUE.songDetail.id) {
+      if (!currentSongId) {
         return { result: { lyric: "" } };
       }
       const result = await apis.getSongLyric(currentSongId);
@@ -54,24 +59,31 @@ const LyricList: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
         ...sx,
       }}
     >
-      {isLoading && (
-        <Typography variant="caption" color="GrayText" sx={{ px: 2 }}>
-          Loading...
-        </Typography>
-      )}
-
       {!isLoading && !lyricListData?.length && (
-        <Typography variant="caption" color="GrayText" sx={{ px: 2 }}>
-          No Lyrics
-        </Typography>
-      )}
-
-      {value?.isChanging && (
         <Typography
           display="flex"
           justifyContent="center"
           alignItems="center"
-          sx={{
+          variant="caption"
+          fontWeight={700}
+          sx={(theme) => ({
+            height: "100%",
+            width: "100%",
+            color: theme.palette.primary.main,
+          })}
+        >
+          No Lyrics Matched
+        </Typography>
+      )}
+
+      {(isLoading || value?.isChanging) && (
+        <Typography
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          variant="caption"
+          fontWeight={700}
+          sx={(theme) => ({
             position: "absolute",
             height: "100%",
             width: "100%",
@@ -79,11 +91,13 @@ const LyricList: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
             left: 0,
             zIndex: 9999,
             borderRadius: 1,
-            bgcolor: "background.paper",
+            color: theme.palette.primary.main,
+            bgcolor:
+              theme.palette.mode === "dark"
+                ? "rgba(60, 60, 60)"
+                : "rgba(240, 240, 240)",
             cursor: "wait",
-          }}
-          variant="caption"
-          color="GrayText"
+          })}
         >
           Loading...
         </Typography>
@@ -99,8 +113,12 @@ const LyricList: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
           }}
         >
           {lyricListData.map((item, index) => {
-            const playerCurrentTime = Math.floor(value?.currentTime || 0); // 播放器当前进度所处时间
-            const playerTotalTime = Math.floor(value?.songDetail?.dt / 1000); // 音乐总时间秒数
+            // 播放器当前进度所处时间
+            const playerCurrentTime = Math.floor(currentTime || 0);
+            // 音乐总时间秒数
+            const playerTotalTime = Math.floor(
+              (value?.songDetail?.dt as number) / 1000,
+            );
             // 当前歌词文本与开始时间
             const { lyricStartTime: currentLyricStart, lyricText } =
               formatLyricDuration(item);

@@ -26,7 +26,7 @@ import SearchList from "./SearchList";
 const Search: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [searchKeyword, setSearchKeyword] = useState<string>("ava-max");
+  const [searchKeyword, setSearchKeyword] = useState<string>("avamax");
   const handleSearch: KeyboardEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = useCallback(
@@ -70,6 +70,18 @@ const Search: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
         placeholder="Search"
         inputRef={inputRef}
         onKeyUp={handleSearch}
+        sx={(theme) => ({
+          "&.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.primary.main,
+          },
+          "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.primary.main,
+          },
+          "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: theme.palette.primary.main,
+            },
+        })}
       />
 
       <SearchList searchKeyword={searchKeyword} />
