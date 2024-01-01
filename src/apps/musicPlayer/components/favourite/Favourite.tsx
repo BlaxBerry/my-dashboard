@@ -6,6 +6,7 @@ import type {
   Theme as MuiTheme,
 } from "@mui/material/styles";
 import { memo, type FC } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useSelector } from "@/libs/redux/hooks";
 import {
@@ -16,6 +17,7 @@ import {
 import FavouriteList from "./FavouriteList";
 
 const Favourite: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
+  const { t } = useTranslation();
   const favouriteListData = useSelector(
     (state) => state.musicPlayer.favouriteList,
   );
@@ -45,7 +47,7 @@ const Favourite: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
         }}
       >
         <FavoriteIcon color="primary" sx={{ mr: 1 }} />
-        Favorite
+        {t("apps.musicPlayer.text.favourite")}
         <Typography
           variant="caption"
           color="primary"
@@ -54,7 +56,7 @@ const Favourite: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
         >
           {favouriteListData.length}
         </Typography>
-        Songs
+        {t("apps.musicPlayer.text.songs")}
       </Typography>
 
       <FavouriteList list={favouriteListData} />

@@ -9,6 +9,7 @@ import type {
 } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import { memo, useContext, useMemo, type FC } from "react";
+import { useTranslation } from "react-i18next";
 
 import { apis } from "../../apis";
 import {
@@ -22,6 +23,7 @@ import {
 import { formatLyricDuration } from "../../fixtures/functions";
 
 const LyricList: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
+  const { t } = useTranslation();
   const { value } = useContext(ContextMusicPlayer);
   const { currentTime } = useContext(ContextMusicPlayerDuration);
 
@@ -72,7 +74,7 @@ const LyricList: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
             color: theme.palette.primary.main,
           })}
         >
-          No Lyrics Matched
+          {t("apps.musicPlayer.status.noLyricMatched")}
         </Typography>
       )}
 
@@ -99,7 +101,7 @@ const LyricList: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
             cursor: "wait",
           })}
         >
-          Loading...
+          {t("apps.musicPlayer.status.loading")}
         </Typography>
       )}
 

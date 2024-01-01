@@ -1,10 +1,9 @@
-import MusicPlayerContainer from "@/apps/musicPlayer";
+import { Outlet } from "react-router-dom";
 
 export default function CollectionsPage() {
   return (
     <>
-      CollectionsPage
-      <MusicPlayerContainer />
+      <Outlet />
     </>
   );
 }

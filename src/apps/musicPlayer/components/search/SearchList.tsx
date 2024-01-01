@@ -13,6 +13,7 @@ import {
   useMemo,
   type FC,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import { apis } from "../../apis";
 import {
@@ -30,6 +31,7 @@ import {
 import type { SongData } from "../../types/api";
 
 const SearchList: FC<{ searchKeyword: string }> = ({ searchKeyword }) => {
+  const { t } = useTranslation();
   const { value, setValue } = useContext(ContextMusicPlayer);
   const { setCurrentTime } = useContext(ContextMusicPlayerDuration);
 
@@ -110,7 +112,7 @@ const SearchList: FC<{ searchKeyword: string }> = ({ searchKeyword }) => {
           color: theme.palette.primary.main,
         })}
       >
-        Loading...
+        {t("apps.musicPlayer.status.loading")}
       </Typography>
     );
   }
@@ -129,7 +131,7 @@ const SearchList: FC<{ searchKeyword: string }> = ({ searchKeyword }) => {
           color: theme.palette.primary.main,
         })}
       >
-        Not Found
+        {t("apps.musicPlayer.status.notFound")}
       </Typography>
     );
   }
@@ -148,7 +150,7 @@ const SearchList: FC<{ searchKeyword: string }> = ({ searchKeyword }) => {
           color: theme.palette.primary.main,
         })}
       >
-        {`API Server Connection Has Problem ( >_< )`}
+        {t("apps.musicPlayer.status.apiConnectError")}
       </Typography>
     );
   }

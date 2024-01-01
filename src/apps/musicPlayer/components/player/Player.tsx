@@ -8,6 +8,7 @@ import type {
   Theme as MuiTheme,
 } from "@mui/material/styles";
 import { memo, useCallback, type FC } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useDispatch, useSelector } from "@/libs/redux/hooks";
 import { musicPlayerActions } from "@/libs/redux/slices";
@@ -21,6 +22,7 @@ import type { SongData } from "../../types/api";
 import PlayerControllers from "./PlayerControllers";
 
 const Player: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const favouriteList = useSelector((state) => state.musicPlayer.favouriteList);
 
@@ -83,7 +85,9 @@ const Player: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
                 cursor: "wait",
               })}
             >
-              {value?.isChanging ? "Loading..." : value?.errorMessage}
+              {value?.isChanging
+                ? t("apps.musicPlayer.status.loading")
+                : value?.errorMessage}
             </Typography>
           )}
 
