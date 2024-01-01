@@ -25,6 +25,7 @@ const BaseLayoutHeader: FC<{ toggleNavDrawer: () => void }> = ({
       sx={(theme) => ({
         bgcolor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
+        zIndex: 99999,
       })}
     >
       <Container

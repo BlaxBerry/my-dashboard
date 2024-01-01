@@ -29,5 +29,20 @@
       "dark": "ダークモード",
       "light": "ライトモード"
     }
+  },
+
+  "apps": {
+    "musicPlayer": {
+      "text": {
+        "favourite": "お気に入り",
+        "songs": "曲"
+      },
+      "status": {
+        "loading": "読み込み中...",
+        "notFound": "見つかりません",
+        "noLyricMatched": "一致する歌詞はありません",
+        "apiConnectError": "サーバー接続に問題があります ( >_< )"
+      }
+    }
   }
 }

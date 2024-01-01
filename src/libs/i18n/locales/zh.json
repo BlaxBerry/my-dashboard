@@ -29,5 +29,20 @@
       "dark": "黑暗模式",
       "light": "明亮模式"
     }
+  },
+
+  "apps": {
+    "musicPlayer": {
+      "text": {
+        "favourite": "收藏",
+        "songs": "曲"
+      },
+      "status": {
+        "loading": "加载中...",
+        "notFound": "没找到",
+        "noLyricMatched": "无匹配的歌词",
+        "apiConnectError": "服务器连接出错 ( >_< )"
+      }
+    }
   }
 }

@@ -5,6 +5,9 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 const Root = lazy(() => import("@/pages/root"));
 const Home = lazy(() => import("@/pages/home"));
 const Collections = lazy(() => import("@/pages/collections"));
+const CollectionMusicPlayer = lazy(
+  () => import("@/pages/collections/musicPlayer"),
+);
 const Settings = lazy(() => import("@/pages/settings"));
 const About = lazy(() => import("@/pages/about"));
 const Error404 = lazy(() => import("@/pages/404"));
@@ -27,6 +30,12 @@ export const router = createBrowserRouter([
       {
         path: "collections",
         element: <Collections />,
+        children: [
+          {
+            path: "musicPlayer",
+            element: <CollectionMusicPlayer />,
+          },
+        ],
       },
 
       {

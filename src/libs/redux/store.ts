@@ -12,9 +12,11 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import appTheme from "./slices/appTheme";
+import musicPlayerSlice from "./slices/musicPlayer";
 
 const rootReducer = combineReducers({
   appTheme: appTheme,
+  musicPlayer: musicPlayerSlice,
 });
 
 const persistConfig = {
