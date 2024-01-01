@@ -4,6 +4,8 @@
 
 ## Links
 
+Render: [https://blaxberry-dashboard-spa.onrender.com](https://blaxberry-dashboard-spa.onrender.com)
+
 ## Tech Stacks
 
 - [Vite]() v5
@@ -21,6 +23,15 @@
 │   ├── __tests__
 │   │   ├── jest
 │   │   └── vitest
+│   ├── apps
+│   │   ├── [app]
+│   │   │   ├── apis
+│   │   │   ├── components
+│   │   │   ├── contexts
+│   │   │   ├── fixtures
+│   │   │   ├── types
+│   │   │   └── ...
+│   │   └── ...
 │   ├── assets
 │   ├── components
 │   │   ├── common
@@ -33,7 +44,6 @@
 │   │   └── root.tsx
 │   ├── types
 │   ├── utils
-│   │   ├── apis
 │   │   ├── constants
 │   │   ├── helpers
 │   │   ├── hooks

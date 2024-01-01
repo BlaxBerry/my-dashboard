@@ -60,7 +60,7 @@ const ThemeLanguageSwitcher: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
             <Avatar
               src={src}
               alt={lang}
-              sx={(theme) => {
+              sx={() => {
                 const isActive = themeLanguage === lang;
                 return {
                   width: 30,
@@ -68,12 +68,10 @@ const ThemeLanguageSwitcher: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
                   border: 2,
                   borderRadius: "50%",
                   borderColor: isActive ? "#EEEEEE" : "background.default",
-                  boxShadow: isActive ? theme.shadows[4] : theme.shadows[1],
+                  boxShadow: isActive ? 4 : 1,
                   transition: "all 0.5s",
                   mr: 1,
-                  "&:hover": {
-                    boxShadow: theme.shadows[4],
-                  },
+                  "&:hover": { boxShadow: 4 },
                 };
               }}
             />

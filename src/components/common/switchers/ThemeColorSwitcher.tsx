@@ -54,14 +54,14 @@ const ThemeColorSwitcher: FC<{ sx?: MuiSxProps<MuiTheme> }> = ({ sx }) => {
                 border: 2,
                 borderRadius: "50%",
                 borderColor: isActive ? "#EEEEEE" : "background.default",
-                boxShadow: isActive ? theme.shadows[4] : theme.shadows[1],
+                boxShadow: isActive ? 4 : 1,
                 backgroundColor: itemColor,
                 cursor: "pointer",
                 transition: "all 0.5s",
                 transform: isActive ? "scale(1.2)" : "scale(1)",
                 "&:hover": {
                   transform: "scale(1.2)",
-                  boxShadow: theme.shadows[4],
+                  boxShadow: 4,
                 },
               };
             }}

@@ -29,5 +29,20 @@
       "dark": "Dark Mode",
       "light": "Light Mode"
     }
+  },
+
+  "apps": {
+    "musicPlayer": {
+      "text": {
+        "favourite": "Favourite",
+        "songs": "Songs"
+      },
+      "status": {
+        "loading": "Loading...",
+        "notFound": "Not Found",
+        "noLyricMatched": "No Lyrics Matched",
+        "apiConnectError": "Server Connection Has Problem ( >_< )"
+      }
+    }
   }
 }
